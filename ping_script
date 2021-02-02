@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+import os
+import time
+
+address1 = "192.168.1.7"
+address2 = "192.168.1.8"
+
+fail1 = 0
+fail2 = 0
+
+while True:
+    print("start over")
+    if fail1 >= 10 & fail2 >= 10:
+        os.system("shutdown -P +1")
+        #os.system("ls -l")
+        break
+
+    ping_comm1 = os.system("ping -c1 " + address1)
+    ping_comm2 = os.system("ping -c1 " + address2)
+
+    if ping_comm1 != 0:
+        #print("ping1 failed")
+        fail1 += 1
+        #print("fail1 count is: " + str(fail1))
+        time.sleep(30)
+    else:
+        #print("ping1 is OK")
+        fail1 = 0
+        time.sleep(30)
+
+    if ping_comm2 != 0:
+        #print("ping2 failed")
+        fail2 += 1
+        #print("fail2 count is: " + str(fail2))
+        time.sleep(30)
+    else:
+        #print("ping2 is OK")
+        fail2 = 0
+        time.sleep(30)
